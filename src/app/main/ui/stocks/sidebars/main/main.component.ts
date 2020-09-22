@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { ContactsService } from 'app/main/ui/contacts/contacts.service';
+import { StocksService } from 'app/main/ui/stocks/stocks.service';
 
 @Component({
     selector   : 'contacts-main-sidebar',
@@ -23,7 +23,7 @@ export class ContactsMainSidebarComponent implements OnInit, OnDestroy
      * @param {ContactsService} _contactsService
      */
     constructor(
-        private _contactsService: ContactsService
+        private _contactsService: StocksService
     )
     {
         // Set the private defaults
@@ -41,11 +41,6 @@ export class ContactsMainSidebarComponent implements OnInit, OnDestroy
     {
         this.filterBy = this._contactsService.filterBy || 'all';
 
-        this._contactsService.onUserDataChanged
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(user => {
-                this.user = user;
-            });
     }
 
     /**

@@ -7,20 +7,20 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
-import { ContactsService } from 'app/main/ui/contacts/contacts.service';
-import { ContactsContactFormDialogComponent } from 'app/main/ui/contacts/contact-form/contact-form.component';
+import { StocksService } from 'app/main/ui/stocks/stocks.service';
+import { StocksFormDialogComponent } from 'app/main/ui/stocks/stock-form/stock-form.component';
 
 @Component({
-    selector     : 'contacts',
-    templateUrl  : './contacts.component.html',
-    styleUrls    : ['./contacts.component.scss'],
+    selector     : 'stocks',
+    templateUrl  : './stocks.component.html',
+    styleUrls    : ['./stocks.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })
-export class ContactsComponent implements OnInit, OnDestroy
+export class StocksComponent implements OnInit, OnDestroy
 {
     dialogRef: any;
-    hasSelectedContacts: boolean;
+    hasSelectedStocks: boolean;
     searchInput: FormControl;
 
     // Private
@@ -29,12 +29,12 @@ export class ContactsComponent implements OnInit, OnDestroy
     /**
      * Constructor
      *
-     * @param {ContactsService} _contactsService
+     * @param {StocksService} _stocksService
      * @param {FuseSidebarService} _fuseSidebarService
      * @param {MatDialog} _matDialog
      */
     constructor(
-        private _contactsService: ContactsService,
+        private _stocksService: StocksService,
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog
     )
@@ -55,10 +55,10 @@ export class ContactsComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        this._contactsService.onSelectedContactsChanged
+        this._stocksService.onSelectedStocksChanged
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(selectedContacts => {
-                this.hasSelectedContacts = selectedContacts.length > 0;
+            .subscribe(selectedStocks => {
+                this.hasSelectedStocks = selectedStocks.length > 0;
             });
 
         this.searchInput.valueChanges
@@ -68,7 +68,7 @@ export class ContactsComponent implements OnInit, OnDestroy
                 distinctUntilChanged()
             )
             .subscribe(searchText => {
-                this._contactsService.onSearchTextChanged.next(searchText);
+                this._stocksService.onSearchTextChanged.next(searchText);
             });
     }
 
@@ -87,12 +87,12 @@ export class ContactsComponent implements OnInit, OnDestroy
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * New contact
+     * New stock
      */
-    newContact(): void
+    newStock(): void
     {
-        this.dialogRef = this._matDialog.open(ContactsContactFormDialogComponent, {
-            panelClass: 'contact-form-dialog',
+        this.dialogRef = this._matDialog.open(StocksFormDialogComponent, {
+            panelClass: 'stock-form-dialog',
             data      : {
                 action: 'new'
             }
@@ -105,7 +105,7 @@ export class ContactsComponent implements OnInit, OnDestroy
                     return;
                 }
 
-                this._contactsService.updateContact(response.getRawValue());
+                this._stocksService.updateStock(response.getRawValue());
             });
     }
 

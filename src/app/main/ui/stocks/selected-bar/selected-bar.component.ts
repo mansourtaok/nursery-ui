@@ -5,7 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/confirm-dialog.component';
 
-import { ContactsService } from 'app/main/ui/contacts/contacts.service';
+import { StocksService } from 'app/main/ui/stocks/stocks.service';
 
 @Component({
     selector   : 'selected-bar',
@@ -25,11 +25,11 @@ export class ContactsSelectedBarComponent implements OnInit, OnDestroy
     /**
      * Constructor
      *
-     * @param {ContactsService} _contactsService
+     * @param {StocksService} _stocksService
      * @param {MatDialog} _matDialog
      */
     constructor(
-        private _contactsService: ContactsService,
+        private _stocksService: StocksService,
         public _matDialog: MatDialog
     )
     {
@@ -46,13 +46,13 @@ export class ContactsSelectedBarComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        this._contactsService.onSelectedContactsChanged
+        this._stocksService.onSelectedStocksChanged
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(selectedContacts => {
                 this.selectedContacts = selectedContacts;
                 setTimeout(() => {
                     this.hasSelectedContacts = selectedContacts.length > 0;
-                    this.isIndeterminate = (selectedContacts.length !== this._contactsService.contacts.length && selectedContacts.length > 0);
+                    this.isIndeterminate = (selectedContacts.length !== this._stocksService.stocks.length && selectedContacts.length > 0);
                 }, 0);
             });
     }
@@ -76,7 +76,7 @@ export class ContactsSelectedBarComponent implements OnInit, OnDestroy
      */
     selectAll(): void
     {
-        this._contactsService.selectContacts();
+        this._stocksService.selectStocks();
     }
 
     /**
@@ -84,7 +84,7 @@ export class ContactsSelectedBarComponent implements OnInit, OnDestroy
      */
     deselectAll(): void
     {
-        this._contactsService.deselectContacts();
+        this._stocksService.deselectStocks();
     }
 
     /**
@@ -102,7 +102,7 @@ export class ContactsSelectedBarComponent implements OnInit, OnDestroy
             .subscribe(result => {
                 if ( result )
                 {
-                    this._contactsService.deleteSelectedContacts();
+                    this._stocksService.deleteSelectedStocks();
                 }
                 this.confirmDialogRef = null;
             });

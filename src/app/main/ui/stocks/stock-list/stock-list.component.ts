@@ -8,26 +8,26 @@ import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/confirm-dialog.component';
 
-import { ContactsService } from 'app/main/ui/contacts/contacts.service';
-import { ContactsContactFormDialogComponent } from 'app/main/ui/contacts/contact-form/contact-form.component';
+import { StocksService } from 'app/main/ui/stocks/stocks.service';
+import { StocksFormDialogComponent } from 'app/main/ui/stocks/stock-form/stock-form.component';
 
 @Component({
-    selector     : 'contacts-contact-list',
-    templateUrl  : './contact-list.component.html',
-    styleUrls    : ['./contact-list.component.scss'],
+    selector     : 'stocks-stock-list',
+    templateUrl  : './stock-list.component.html',
+    styleUrls    : ['./stock-list.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })
-export class ContactsContactListComponent implements OnInit, OnDestroy
+export class StocksListComponent implements OnInit, OnDestroy
 {
     @ViewChild('dialogContent')
     dialogContent: TemplateRef<any>;
 
-    contacts: any;
-    user: any;
+    stocks: any;
+    
     dataSource: FilesDataSource | null;
     displayedColumns = ['checkbox', 'name','description',  'buttons'];
-    selectedContacts: any[];
+    selectedStocks: any[];
     checkboxes: {};
     dialogRef: any;
     confirmDialogRef: MatDialogRef<FuseConfirmDialogComponent>;
@@ -38,11 +38,11 @@ export class ContactsContactListComponent implements OnInit, OnDestroy
     /**
      * Constructor
      *
-     * @param {ContactsService} _contactsService
+     * @param {StocksService} _stocksService
      * @param {MatDialog} _matDialog
      */
     constructor(
-        private _contactsService: ContactsService,
+        private _stocksService: StocksService,
         public _matDialog: MatDialog
     )
     {
@@ -59,22 +59,22 @@ export class ContactsContactListComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        this.dataSource = new FilesDataSource(this._contactsService);
+        this.dataSource = new FilesDataSource(this._stocksService);
 
-        this._contactsService.onContactsChanged
+        this._stocksService.onStocksChanged
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(contacts => {
-                this.contacts = contacts;
+            .subscribe(stocks => {
+                this.stocks = stocks;
 
                 this.checkboxes = {};
-                contacts.map(contact => {
-                    this.checkboxes[contact.id] = false;
+                stocks.map(stock => {
+                    this.checkboxes[stock.id] = false;
                 });
             });
 
-        this._contactsService.onSelectedContactsChanged
+        this._stocksService.onSelectedStocksChanged
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(selectedContacts => {
+            .subscribe(selectedStocks => {
                 for ( const id in this.checkboxes )
                 {
                     if ( !this.checkboxes.hasOwnProperty(id) )
@@ -82,21 +82,17 @@ export class ContactsContactListComponent implements OnInit, OnDestroy
                         continue;
                     }
 
-                    this.checkboxes[id] = selectedContacts.includes(id);
+                    this.checkboxes[id] = selectedStocks.includes(id);
                 }
-                this.selectedContacts = selectedContacts;
+                this.selectedStocks = selectedStocks;
             });
 
-        this._contactsService.onUserDataChanged
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(user => {
-                this.user = user;
-            });
+        
 
-        this._contactsService.onFilterChanged
+        this._stocksService.onFilterChanged
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(() => {
-                this._contactsService.deselectContacts();
+                this._stocksService.deselectStocks();
             });
     }
 
@@ -115,16 +111,16 @@ export class ContactsContactListComponent implements OnInit, OnDestroy
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Edit contact
+     * Edit stock
      *
-     * @param contact
+     * @param stock
      */
-    editContact(contact): void
+    editStock(stock): void
     {
-        this.dialogRef = this._matDialog.open(ContactsContactFormDialogComponent, {
-            panelClass: 'contact-form-dialog',
+        this.dialogRef = this._matDialog.open(StocksFormDialogComponent, {
+            panelClass: 'stock-form-dialog',
             data      : {
-                contact: contact,
+                stock: stock,
                 action : 'edit'
             }
         });
@@ -144,7 +140,7 @@ export class ContactsContactListComponent implements OnInit, OnDestroy
                      */
                     case 'save':
 
-                        this._contactsService.updateContact(formData.getRawValue());
+                        this._stocksService.updateStock(formData.getRawValue());
 
                         break;
                     /**
@@ -152,7 +148,7 @@ export class ContactsContactListComponent implements OnInit, OnDestroy
                      */
                     case 'delete':
 
-                        this.deleteContact(contact);
+                        this.deleteStock(stock);
 
                         break;
                 }
@@ -160,9 +156,9 @@ export class ContactsContactListComponent implements OnInit, OnDestroy
     }
 
     /**
-     * Delete Contact
+     * Delete stock
      */
-    deleteContact(contact): void
+    deleteStock(stock): void
     {
         this.confirmDialogRef = this._matDialog.open(FuseConfirmDialogComponent, {
             disableClose: false
@@ -173,7 +169,7 @@ export class ContactsContactListComponent implements OnInit, OnDestroy
         this.confirmDialogRef.afterClosed().subscribe(result => {
             if ( result )
             {
-                this._contactsService.deleteContact(contact);
+                this._stocksService.deleteStock(stock);
             }
             this.confirmDialogRef = null;
         });
@@ -183,31 +179,14 @@ export class ContactsContactListComponent implements OnInit, OnDestroy
     /**
      * On selected change
      *
-     * @param contactId
+     * @param stockId
      */
-    onSelectedChange(contactId): void
+    onSelectedChange(stockId): void
     {
-        this._contactsService.toggleSelectedContact(contactId);
+        this._stocksService.toggleSelectedStock(stockId);
     }
 
-    /**
-     * Toggle star
-     *
-     * @param contactId
-     */
-    toggleStar(contactId): void
-    {
-        if ( this.user.starred.includes(contactId) )
-        {
-            this.user.starred.splice(this.user.starred.indexOf(contactId), 1);
-        }
-        else
-        {
-            this.user.starred.push(contactId);
-        }
-
-        this._contactsService.updateUserData(this.user);
-    }
+    
 }
 
 export class FilesDataSource extends DataSource<any>
@@ -215,10 +194,10 @@ export class FilesDataSource extends DataSource<any>
     /**
      * Constructor
      *
-     * @param {ContactsService} _contactsService
+     * @param {StocksService} _stocksService
      */
     constructor(
-        private _contactsService: ContactsService
+        private _stocksService: StocksService
     )
     {
         super();
@@ -230,7 +209,7 @@ export class FilesDataSource extends DataSource<any>
      */
     connect(): Observable<any[]>
     {
-        return this._contactsService.onContactsChanged;
+        return this._stocksService.onStocksChanged;
     }
 
     /**

@@ -1,4 +1,4 @@
-<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+<div id="stocks" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
 
     <!-- HEADER -->
     <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start"
@@ -7,16 +7,9 @@
         <!-- APP TITLE -->
         <div fxLayout="row" fxLayoutAlign="start center">
 
-            <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm
-                    (click)="toggleSidebar('contacts-main-sidebar')">
-                <mat-icon>menu</mat-icon>
-            </button>
-
-            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="logo-icon mr-16"
-                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">account_box
-                </mat-icon>
-                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                
+                <span class="logo-text" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     Stocks
                 </span>
             </div>
@@ -43,7 +36,7 @@
     <!-- / HEADER -->
 
     <!-- SELECTED BAR -->
-    <selected-bar class="accent-600" *ngIf="hasSelectedContacts" [@slideInTop]></selected-bar>
+    <selected-bar class="accent-600" *ngIf="hasSelectedStocks" [@slideInTop]></selected-bar>
     <!-- / SELECTED BAR -->
 
     <!-- CONTENT -->
@@ -55,7 +48,7 @@
 
             <!-- CONTENT -->
             <div class="content">
-                <contacts-contact-list></contacts-contact-list>
+                <stocks-stock-list></stocks-stock-list>
             </div>
             <!-- / CONTENT -->
 
@@ -67,9 +60,9 @@
 
 </div>
 
-<!-- ADD CONTACT BUTTON -->
-<button mat-fab class="accent" id="add-contact-button" (click)="newContact()" aria-label="add contact"
+<!-- ADD STOCK BUTTON -->
+<button mat-fab class="accent" id="add-stock-button" (click)="newStock()" aria-label="add stock"
         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
-    <mat-icon>person_add</mat-icon>
+    <mat-icon>add</mat-icon>
 </button>
-<!-- / ADD CONTACT BUTTON -->
+<!-- / ADD STOCK BUTTON -->

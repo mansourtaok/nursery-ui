@@ -3,8 +3,8 @@
     <!-- Checkbox Column -->
     <ng-container matColumnDef="checkbox">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let contact">
-            <mat-checkbox [(ngModel)]="checkboxes[contact.id]" (ngModelChange)="onSelectedChange(contact.id)"
+        <mat-cell *matCellDef="let stock">
+            <mat-checkbox [(ngModel)]="checkboxes[stock.id]" (ngModelChange)="onSelectedChange(stock.id)"
                           (click)="$event.stopPropagation()">
             </mat-checkbox>
         </mat-cell>
@@ -22,8 +22,8 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-        <mat-cell *matCellDef="let contact">
-            <p class="text-truncate font-weight-600">{{contact.name}}</p>
+        <mat-cell *matCellDef="let stock">
+            <p class="text-truncate font-weight-600">{{stock.name}}</p>
         </mat-cell>
     </ng-container>
 
@@ -31,9 +31,9 @@
     <!-- Description Column -->
     <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Description</mat-header-cell>
-        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+        <mat-cell *matCellDef="let stock" fxHide fxShow.gt-md>
             <p class="phone text-truncate">
-                {{contact.description}}
+                {{stock.description}}
             </p>
         </mat-cell>
     </ng-container>
@@ -41,9 +41,9 @@
     <!-- Buttons Column -->
     <ng-container matColumnDef="buttons">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let contact">
+        <mat-cell *matCellDef="let stock">
             <div fxFlex="row" fxLayoutAlign="end center">
-                <button mat-icon-button (click)="$event.stopPropagation();toggleStar(contact.id)" aria-label="Toggle star">
+                <button mat-icon-button (click)="$event.stopPropagation();toggleStar(stock.id)" aria-label="Toggle star">
                 </button>
 
                 <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
@@ -52,7 +52,7 @@
                 </button>
 
                 <mat-menu #moreMenu="matMenu">
-                    <button mat-menu-item aria-label="remove" (click)="deleteContact(contact)">
+                    <button mat-menu-item aria-label="remove" (click)="deleteStock(stock)">
                         <mat-icon>delete</mat-icon>
                         <span>Remove</span>
                     </button>
@@ -63,10 +63,10 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let contact; columns: displayedColumns;"
-             class="contact"
-             (click)="editContact(contact)"
-             [ngClass]="{'accent-50':checkboxes[contact.id]}"
+    <mat-row *matRowDef="let stock; columns: displayedColumns;"
+             class="stock"
+             (click)="editStock(stock)"
+             [ngClass]="{'accent-50':checkboxes[stock.id]}"
              [@animate]="{value:'*',params:{y:'100%'}}">
     </mat-row>
 </mat-table>

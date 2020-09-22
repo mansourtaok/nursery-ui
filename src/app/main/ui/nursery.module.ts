@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { UIFormsModule } from 'app/main/ui/forms/forms.module';
-import { ContactsModule } from './contacts/contacts.module';
+import { StocksModule } from './stocks/stocks.module';
 
 
 @NgModule({
     imports: [
         UIFormsModule,
-        ContactsModule
+        StocksModule
     ]
 })
 export class NureryModule

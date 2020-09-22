@@ -8,13 +8,13 @@
         </mat-toolbar-row>
 
         <mat-toolbar-row class="toolbar-bottom py-1" fxLayout="column" fxLayoutAlign="center center">
-            <div class="contact-name mt-8">{{contact.name}}</div>
+            <div class="stock-name mt-8">{{stock.name}}</div>
         </mat-toolbar-row>
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
 
-        <form [formGroup]="contactForm">
+        <form [formGroup]="stockForm">
 
             <div fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field appearance="outline" fxFlex>
@@ -40,7 +40,7 @@
         <button *ngIf="action === 'edit'"
                 mat-button
                 class="mr-8"
-                (click)="matDialogRef.close(['delete',contactForm])"
+                (click)="matDialogRef.close(['delete',stockForm])"
                 aria-label="Delete"
                 matTooltip="Delete">
             DELETE
@@ -49,8 +49,8 @@
         <button *ngIf="action !== 'edit'"
                 mat-button
                 class="save-button"
-                (click)="matDialogRef.close(contactForm)"
-                [disabled]="contactForm.invalid"
+                (click)="matDialogRef.close(stockForm)"
+                [disabled]="stockForm.invalid"
                 aria-label="SAVE">
             ADD
         </button>
@@ -58,8 +58,8 @@
         <button *ngIf="action === 'edit'"
                 mat-button
                 class="save-button"
-                (click)="matDialogRef.close(['save',contactForm])"
-                [disabled]="contactForm.invalid"
+                (click)="matDialogRef.close(['save',stockForm])"
+                [disabled]="stockForm.invalid"
                 aria-label="SAVE">
             SAVE
         </button>

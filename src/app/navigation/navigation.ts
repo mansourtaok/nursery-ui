@@ -24,7 +24,7 @@ export const navigation: FuseNavigation[] = [
                         id   : 'stocks',
                         title: 'Stocks',
                         type : 'item',
-                        url  : '/ui/contacts'
+                        url  : '/ui/stocks'
                     },
                     {
                         id   : 'species',

@@ -18,7 +18,6 @@ import { StocksComponent } from 'app/main/ui/stocks/stocks.component';
 import { StocksService } from 'app/main/ui/stocks/stocks.service';
 import { StocksListComponent } from 'app/main/ui/stocks/stock-list/stock-list.component';
 import { ContactsSelectedBarComponent } from 'app/main/ui/stocks/selected-bar/selected-bar.component';
-import { ContactsMainSidebarComponent } from 'app/main/ui/stocks/sidebars/main/main.component';
 import { StocksFormDialogComponent } from 'app/main/ui/stocks/stock-form/stock-form.component';
 
 const routes: Routes = [
@@ -36,7 +35,7 @@ const routes: Routes = [
         StocksComponent,
         StocksListComponent,
         ContactsSelectedBarComponent,
-        ContactsMainSidebarComponent,
+        
         StocksFormDialogComponent
     ],
     imports        : [

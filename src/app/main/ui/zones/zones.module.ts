@@ -14,29 +14,29 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseConfirmDialogModule, FuseSidebarModule } from '@fuse/components';
 
-import { StocksComponent } from 'app/main/ui/stocks/stocks.component';
-import { StocksService } from 'app/main/ui/stocks/stocks.service';
-import { StocksListComponent } from 'app/main/ui/stocks/stock-list/stock-list.component';
-import { StocksSelectedBarComponent } from 'app/main/ui/stocks/selected-bar/selected-bar.component';
-import { StocksFormDialogComponent } from 'app/main/ui/stocks/stock-form/stock-form.component';
+import { ZoneComponent } from 'app/main/ui/zones/zones.component';
+import { ZoneService } from 'app/main/ui/zones/zones.service';
+import { ZoneListComponent } from 'app/main/ui/zones/zone-list/zone-list.component';
+import { ZoneSelectedBarComponent } from 'app/main/ui/zones/selected-bar/selected-bar.component';
+import { ZoneFormDialogComponent } from 'app/main/ui/zones/zone-form/zone-form.component';
+
 
 const routes: Routes = [
     {
-        path     : 'stocks',
-        component: StocksComponent,
+        path     : 'zones',
+        component: ZoneComponent,
         resolve  : {
-            stocks: StocksService
+            zones: ZoneService
         }
     }
 ];
 
 @NgModule({
     declarations   : [
-        StocksComponent,
-        StocksListComponent,
-        StocksSelectedBarComponent,
-        
-        StocksFormDialogComponent
+        ZoneComponent,
+        ZoneListComponent,
+        ZoneSelectedBarComponent,        
+        ZoneFormDialogComponent
     ],
     imports        : [
         RouterModule.forChild(routes),
@@ -57,12 +57,12 @@ const routes: Routes = [
         FuseSidebarModule
     ],
     providers      : [
-        StocksService
+        ZoneService
     ],
     entryComponents: [
-        StocksFormDialogComponent
+        ZoneFormDialogComponent
     ]
 })
-export class StocksModule
+export class ZoneModule
 {
 }

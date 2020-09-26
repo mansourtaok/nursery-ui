@@ -17,7 +17,7 @@ export const navigation: FuseNavigation[] = [
                         id      : 'zones',
                         title   : 'Zones',
                         type    : 'item',                        
-                        url  : '/sample'
+                        url  : '/ui/zones'
                     },
                     
                     {

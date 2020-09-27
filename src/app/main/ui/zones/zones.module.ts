@@ -19,6 +19,7 @@ import { ZoneService } from 'app/main/ui/zones/zones.service';
 import { ZoneListComponent } from 'app/main/ui/zones/zone-list/zone-list.component';
 import { ZoneSelectedBarComponent } from 'app/main/ui/zones/selected-bar/selected-bar.component';
 import { ZoneFormDialogComponent } from 'app/main/ui/zones/zone-form/zone-form.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 const routes: Routes = [
@@ -51,7 +52,7 @@ const routes: Routes = [
         MatRippleModule,
         MatTableModule,
         MatToolbarModule,
-
+        MatSelectModule,
         FuseSharedModule,
         FuseConfirmDialogModule,
         FuseSidebarModule

@@ -30,7 +30,7 @@ export const navigation: FuseNavigation[] = [
                         id   : 'species',
                         title: 'Species',
                         type : 'item',
-                        url  : '/ui/forms'
+                        url  : '/ui/species'
                     }
 
                 ]

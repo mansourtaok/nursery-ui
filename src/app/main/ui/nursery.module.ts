@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { UIFormsModule } from 'app/main/ui/forms/forms.module';
+import { SpeciesModule } from './species/species.module';
 import { StocksModule } from './stocks/stocks.module';
 import { ZoneModule } from './zones/zones.module';
 
@@ -9,7 +10,8 @@ import { ZoneModule } from './zones/zones.module';
     imports: [
         ZoneModule,
         UIFormsModule,        
-        StocksModule
+        StocksModule,
+        SpeciesModule
     ]
 })
 export class NureryModule

@@ -1,0 +1,76 @@
+<mat-table #table [dataSource]="dataSource"
+           [@animateStagger]="{value:'50'}">
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="checkbox">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let species">
+            <mat-checkbox [(ngModel)]="checkboxes[species.id]" (ngModelChange)="onSelectedChange(species.id)"
+                          (click)="$event.stopPropagation()">
+            </mat-checkbox>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Avatar Column 
+    <ng-container matColumnDef="avatar">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let contact">
+            <img class="avatar" *ngIf="contact.avatar" [alt]="contact.name"
+                 [src]="contact.avatar"/>
+        </mat-cell>
+    </ng-container>-->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let species">
+            <p class="text-truncate font-weight-600">{{species.name}}</p>
+        </mat-cell>
+    </ng-container>
+
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="nameAr">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Arabic Name</mat-header-cell>
+        <mat-cell *matCellDef="let species" fxHide fxShow.gt-md>
+            <p class="phone text-truncate">
+                {{species.nameAr}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+
+    
+    <!-- Buttons Column -->
+    <ng-container matColumnDef="buttons">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let species">
+            <div fxFlex="row" fxLayoutAlign="end center">
+                <button mat-icon-button (click)="$event.stopPropagation();toggleStar(species.id)" aria-label="Toggle star">
+                </button>
+
+                <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
+                        (click)="$event.stopPropagation();">
+                    <mat-icon class="secondary-text">more_vert</mat-icon>
+                </button>
+
+                <mat-menu #moreMenu="matMenu">
+                    <button mat-menu-item aria-label="remove" (click)="deleteSpecies(species)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Remove</span>
+                    </button>
+                </mat-menu>
+            </div>
+
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let species; columns: displayedColumns;"
+             class="species"
+             (click)="editSpecies(species)"
+             [ngClass]="{'accent-50':checkboxes[species.id]}"
+             [@animate]="{value:'*',params:{y:'100%'}}">
+    </mat-row>
+</mat-table>
+
+

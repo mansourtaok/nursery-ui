@@ -1,0 +1,232 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+
+        <mat-toolbar-row class="toolbar-bottom py-1" fxLayout="column" fxLayoutAlign="center center">
+            <div class="harvest-name mt-8">{{harvest.site}}</div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+
+        <div class="horizontal-stepper-wrapper">
+            <mat-horizontal-stepper class="mat-elevation-z4" [linear]="true">
+                <mat-step [stepControl]="idHarvestForm">
+
+                    <form fxLayout="column" [formGroup]="idHarvestForm">
+
+                        <ng-template matStepLabel>About</ng-template>
+
+                        <div fxFlex="1 0 auto" fxLayout="column">
+
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Name</mat-label>
+                                <input matInput formControlName="name">
+                                <mat-error >Name is required!</mat-error>                                
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Harvest date</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="harvestDate"> 
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Description</mat-label>
+                                <textarea name="description" formControlName="description" matInput type="text" max-rows="4"></textarea>                                
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Harvest way</mat-label>
+                                <input matInput formControlName="harvestWay">                                
+                            </mat-form-field>
+                
+
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-raised-button matStepperNext type="button" color="accent">
+                                Next
+                            </button>
+                        </div>
+
+                    </form>
+
+                </mat-step>                
+
+                <mat-step [stepControl]="siteHarvestForm">
+
+                    <form fxLayout="column" [formGroup]="siteHarvestForm">
+
+                        <ng-template matStepLabel>The site</ng-template>
+
+                        <div fxFlex="1 0 auto" fxLayout="column">
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Site</mat-label>
+                                <input matInput formControlName="site" required>
+                                <mat-error>Site is required!</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Lattitude</mat-label>
+                                <input matInput formControlName="latitude" required>
+                                <mat-error>Lattitude is required!</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Longitude</mat-label>
+                                <input matInput formControlName="longitude" required>
+                                <mat-error>Longitude is required!</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Elevation</mat-label>
+                                <input matInput formControlName="elevation" required>
+                                <mat-error>Longitude is required!</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Species</mat-label>
+                                <mat-select formControlName="speciesId">
+                                    <mat-option *ngFor="let sp of species" [value]="sp.id">
+                                      {{sp.name}}
+                                    </mat-option>
+                                  </mat-select>
+                            </mat-form-field>
+            
+
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                                Previous
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent">
+                                Next
+                            </button>
+                        </div>
+
+                    </form>
+
+                </mat-step>          
+                
+                
+                <mat-step [stepControl]="conesAndSidsHarvestForm">
+                    <form fxLayout="column" [formGroup]="conesAndSidsHarvestForm">
+                        <ng-template matStepLabel>Cones & seeds</ng-template>
+                        
+                        <div fxFlex="1 0 auto" fxLayout="column">
+                            
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Weigth</mat-label>
+                                <input matInput formControlName="weigth" required>
+                                <mat-error>Weigth is required!</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Number of cones</mat-label>
+                                <input matInput formControlName="conesNumber" required>
+                                <mat-error>Field is required!</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Cones Width</mat-label>
+                                <input matInput formControlName="conesWidth" required>
+                                <mat-error>Field is required!</mat-error>
+                            </mat-form-field>
+                            
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Valid cones</mat-label>
+                                <input matInput formControlName="validCones" required>
+                                <mat-error>Field is required!</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Valid seeds Weight</mat-label>
+                                <input matInput formControlName="validSeedsWeight" required>
+                                <mat-error>Field is required!</mat-error>
+                            </mat-form-field>
+                            
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Valid seeds Number</mat-label>
+                                <input matInput formControlName="validSeedsNumber" required>
+                                <mat-error>Field is required!</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Health</mat-label>
+                                <input matInput formControlName="health" required>
+                                <mat-error>Field is required!</mat-error>
+                            </mat-form-field>
+
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                                Previous
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent">
+                                Next
+                            </button>
+                        </div>
+
+                    </form>
+
+                </mat-step>
+
+                <mat-step [stepControl]="weatherHarvestForm">
+
+                    <form fxLayout="column" [formGroup]="weatherHarvestForm">
+
+                        <ng-template matStepLabel>Weather</ng-template>
+
+                        <div fxFlex="1 0 auto" fxLayout="column">
+                            
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Weather</mat-label>
+                                <input matInput formControlName="weather" required>
+                                <mat-error>Weather is required!</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Temperature</mat-label>
+                                <input matInput formControlName="temperature" required>
+                                <mat-error>Field is required!</mat-error>
+                            </mat-form-field>
+
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                                Previous
+                            </button>
+
+                            <button mat-raised-button matStepperNext type="button" color="accent"
+                                mat-button
+                                class="save-button"
+                                (click)="matDialogRef.close([idHarvestForm,siteHarvestForm,conesAndSidsHarvestForm,weatherHarvestForm])"  
+                                aria-label="SAVE">
+                                SAVE
+                            </button>
+            
+
+                            
+                        </div>
+
+                    </form>
+                </mat-step>    
+            </mat-horizontal-stepper>
+        </div>
+
+
+        <!-- MAIN DIV ENDS HERE-->
+    </div>
+
+    
+</div>

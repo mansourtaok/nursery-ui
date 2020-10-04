@@ -90,7 +90,7 @@ export class HarvestFormDialogComponent
         });
 
         this.conesAndSidsHarvestForm = this._formBuilder.group({            
-            weigth: [this.harvest.weigth, Validators.required],
+            weight: [this.harvest.weight, Validators.required],
             conesNumber: [this.harvest.conesNumber ],
             conesWidth : [this.harvest.conesWidth],
             validCones : [this.harvest.validCones],

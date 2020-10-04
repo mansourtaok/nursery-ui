@@ -17,7 +17,7 @@ export class Harvest
     speciesId:string;
     
     
-    weigth:string;
+    weight:string;
     conesNumber:string;
     conesWidth:string;    
     validCones:string;
@@ -48,7 +48,7 @@ export class Harvest
             this.longitude = harvest.longitude || '';
             this.harvestDate = harvest.harvestDate || '';
             this.harvestWay = harvest.harvestWay || '';
-            this.weigth = harvest.weigth || '';
+            this.weight = harvest.weight || '';
             this.conesNumber = harvest.conesNumber || '';
             this.conesWidth = harvest.conesWidth || '';
             this.validCones = harvest.validCones || '';

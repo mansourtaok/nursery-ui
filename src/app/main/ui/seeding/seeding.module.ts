@@ -13,35 +13,34 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseConfirmDialogModule, FuseSidebarModule } from '@fuse/components';
-
-import { HarvestListComponent } from 'app/main/ui/harvest/harvest-list/harvest-list.component';
-import { HarvestSelectedBarComponent } from 'app/main/ui/harvest/selected-bar/selected-bar.component';
-import { harvestComponent } from 'app/main/ui/harvest/harvest.component';
-import { HarvestService } from './harvest.service';
-import { HarvestFormDialogComponent } from './harvest-form/harvest-form.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
+import { SeedingFormDialogComponent } from './seeding-form/seeding-form.component';
+import { SeedingService } from './seeding.service';
+import { SeedingComponent } from './seeding.component';
+import { SeedingListComponent } from './seeding-list/seeding-list.component';
+import { SeedingSelectedBarComponent } from './selected-bar/selected-bar.component';
 import { DatePipe } from '@angular/common';
 
 
 
 const routes: Routes = [
     {
-        path     : 'harvest',
-        component: harvestComponent,
+        path     : 'seeding',
+        component: SeedingComponent,
         resolve  : {
-            harvests: HarvestService
+            seedingList: SeedingService
         }
     }
 ];
 
 @NgModule({
     declarations   : [
-        harvestComponent,
-        HarvestListComponent,
-        HarvestSelectedBarComponent,
+        SeedingComponent,
+        SeedingListComponent,
+        SeedingSelectedBarComponent,
         
-        HarvestFormDialogComponent
+        SeedingFormDialogComponent
     ],
     imports        : [
         RouterModule.forChild(routes),
@@ -63,13 +62,13 @@ const routes: Routes = [
         MatStepperModule,
     ],
     providers      : [
-        HarvestService,
+        SeedingService,
         DatePipe
     ],
     entryComponents: [
-        HarvestFormDialogComponent
+        SeedingFormDialogComponent
     ]
 })
-export class HarvestModule
+export class SeedingModule
 {
 }

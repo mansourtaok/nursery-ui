@@ -1,13 +1,13 @@
 @import "src/@fuse/scss/fuse";
 
-.harvest-form-dialog {
+.seeding-form-dialog {
 
     @include media-breakpoint('xs') {
         width: 100%;
     }
 
     @include media-breakpoint('gt-xs') {
-        width: 700px;
+        width: 400px;
     }
 
     .mat-dialog-container {

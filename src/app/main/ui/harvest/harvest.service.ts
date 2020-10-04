@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FuseUtils } from '@fuse/utils';
 
 import { Harvest } from 'app/main/ui/harvest/harvest.model';
+import { DatePipe } from '@angular/common';
 
 @Injectable()
 export class HarvestService implements Resolve<any>
@@ -27,7 +28,8 @@ export class HarvestService implements Resolve<any>
      * @param {HttpClient} _httpClient
      */
     constructor(
-        private _httpClient: HttpClient
+        private _httpClient: HttpClient,
+        private _datePipe :DatePipe
     )
     {
         // Set the defaults
@@ -186,6 +188,9 @@ export class HarvestService implements Resolve<any>
     updateHarvest(harvest): Promise<any>
     {
         return new Promise((resolve, reject) => {
+
+
+            harvest.harvestDate =  this._datePipe.transform(harvest.harvestDate, 'yyyy-MM-dd') ;
 
             if(harvest.id == -1){
                 this._httpClient.put('http://localhost:8080/api/v1/nursery/harvest', {...harvest})

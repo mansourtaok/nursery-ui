@@ -6,6 +6,7 @@ export class Zone
     name: string;    
     description:string;
     stockId:string;
+    seedingId :string;
 
     /**
      * Constructor
@@ -19,6 +20,7 @@ export class Zone
             this.name = zone.name || '';
             this.description = zone.description || '';
             this.stockId = zone.stockId || -1;
+            this.seedingId = zone.seedingId || -1;
         }
     }
 }

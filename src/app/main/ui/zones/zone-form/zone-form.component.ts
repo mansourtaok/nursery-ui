@@ -1,6 +1,7 @@
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { SeedingService } from '../../seeding/seeding.service';
 import { StocksComponent } from '../../stocks/stocks.component';
 import { StocksService } from '../../stocks/stocks.service';
 import { Zone } from '../zone.model';
@@ -19,6 +20,7 @@ export class ZoneFormDialogComponent
     zoneForm: FormGroup;
     dialogTitle: string;
     stocks :any;
+    seedingList : any;
     
 
     /**
@@ -33,6 +35,7 @@ export class ZoneFormDialogComponent
         @Inject(MAT_DIALOG_DATA) private _data: any,
         private _formBuilder: FormBuilder,
         private _stockService: StocksService,
+        private _seedingService :SeedingService
     )
     {
         // Set the defaults
@@ -52,6 +55,7 @@ export class ZoneFormDialogComponent
         
         this.zoneForm = this.createZoneForm();
         this._stockService.getStocks().then(data => this.stocks = data ) ;
+        this._seedingService.getSeedings().then(data => this.seedingList = data);
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -69,7 +73,8 @@ export class ZoneFormDialogComponent
             id      : [this.zone.id],
             name    : [this.zone.name],
             description :[this.zone.description],
-            stockId:this.zone.stockId
+            stockId:this.zone.stockId,
+            seedingId : this.zone.seedingId
         });
     }
 }

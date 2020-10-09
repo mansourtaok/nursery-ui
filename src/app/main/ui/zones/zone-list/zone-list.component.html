@@ -27,6 +27,21 @@
         </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="seeding">
+        <mat-header-cell *matHeaderCellDef>Seeding</mat-header-cell>
+        <mat-cell *matCellDef="let zone">
+            <p class="text-truncate font-weight-600">{{seedingName(zone.seedingId)}}</p>
+        </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="stock">
+        <mat-header-cell *matHeaderCellDef>Stock</mat-header-cell>
+        <mat-cell *matCellDef="let zone">
+            <p class="text-truncate font-weight-600">{{stockName(zone.stockId)}}</p>
+        </mat-cell>
+    </ng-container>
+
 
     <!-- Description Column -->
     <ng-container matColumnDef="description">

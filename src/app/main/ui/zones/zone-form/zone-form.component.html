@@ -26,10 +26,14 @@
 
             <div fxLayout="row" class="textarea-wrapper" fxLayoutAlign="start start">
                 <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Description</mat-label>
-                    <textarea name="description" formControlName="description" matInput type="text" max-rows="4"></textarea>
+                    <mat-label>Seeding</mat-label>
+                    <mat-select formControlName="seedingId">
+                        <mat-option *ngFor="let seeding of seedingList" [value]="seeding.id">
+                          {{seeding.name}}
+                        </mat-option>
+                      </mat-select>
                 </mat-form-field>
-            </div>
+            </div>  
 
 
             <div fxLayout="row" class="textarea-wrapper" fxLayoutAlign="start start">
@@ -41,7 +45,16 @@
                         </mat-option>
                       </mat-select>
                 </mat-form-field>
-            </div>            
+            </div>  
+
+            
+            <div fxLayout="row" class="textarea-wrapper" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Description</mat-label>
+                    <textarea name="description" formControlName="description" matInput type="text" max-rows="4"></textarea>
+                </mat-form-field>
+            </div>
+            
         </form>
 
     </div>

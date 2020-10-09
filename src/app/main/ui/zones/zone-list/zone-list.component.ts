@@ -9,6 +9,10 @@ import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/confirm-dialog.component';
 import { ZoneService } from '../zones.service';
 import { ZoneFormDialogComponent } from '../zone-form/zone-form.component';
+import { StocksService } from '../../stocks/stocks.service';
+import { Stock } from '../../stocks/stock.model';
+import { Seeding } from '../../seeding/seeding.model';
+import { SeedingService } from '../../seeding/seeding.service';
 
 @Component({
     selector     : 'zones-zone-list',
@@ -23,9 +27,11 @@ export class ZoneListComponent implements OnInit, OnDestroy
     dialogContent: TemplateRef<any>;
 
     zones: any;
+    stocks : Stock[];
+    seedingList :Seeding[];
     
     dataSource: FilesDataSource | null;
-    displayedColumns = ['checkbox', 'name','description',  'buttons'];
+    displayedColumns = ['checkbox', 'name', 'seeding', 'stock','description',  'buttons'];
     selectedZones: any[];
     checkboxes: {};
     dialogRef: any;
@@ -42,6 +48,8 @@ export class ZoneListComponent implements OnInit, OnDestroy
      */
     constructor(
         private _zoneService: ZoneService,
+        private _stockService: StocksService,
+        private _seedingService : SeedingService,
         public _matDialog: MatDialog
     )
     {
@@ -52,6 +60,14 @@ export class ZoneListComponent implements OnInit, OnDestroy
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
+
+    stockName(stockId):string {
+        return this.stocks.find(s => s.id == stockId).name ;        
+    }
+
+    seedingName(seedingId):string{
+        return this.seedingList.find(s => s.id == seedingId).name ;
+    }
 
     /**
      * On init
@@ -93,7 +109,11 @@ export class ZoneListComponent implements OnInit, OnDestroy
             .subscribe(() => {
                 this._zoneService.deselectZones();
             });
+
+        this._stockService.getStocks().then(data => this.stocks = data) ;
+        this._seedingService.getSeedings().then(data => this.seedingList = data) ;
     }
+    
 
     /**
      * On destroy

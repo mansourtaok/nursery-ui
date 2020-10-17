@@ -1,0 +1,68 @@
+<div id="measurements" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+
+    <!-- HEADER -->
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start"
+         fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+        <!-- APP TITLE -->
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                
+                <span class="logo-text" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Measurements
+                </span>
+            </div>
+
+        </div>
+        <!-- / APP TITLE -->
+
+        <!-- SEARCH -->
+        <div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
+
+            <div class="search-wrapper mt-16 mt-sm-0">
+
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input [formControl]="searchInput" placeholder="Search for a measurement">
+                </div>
+
+            </div>
+
+        </div>
+        <!-- / SEARCH -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- SELECTED BAR -->
+    <measurement-selected-bar class="accent-600" *ngIf="hasSelectedMeasurements" [@slideInTop]></measurement-selected-bar>
+    <!-- / SELECTED BAR -->
+
+    <!-- CONTENT -->
+    <div class="content">
+
+
+        <!-- CENTER -->
+        <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
+
+            <!-- CONTENT -->
+            <div class="content">
+                <measurement-list></measurement-list>
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CENTER -->
+
+    </div>
+    <!-- / CONTENT-->
+
+</div>
+
+<!-- ADD MEASUREMENT BUTTON -->
+<button mat-fab class="accent" id="add-measurement-button" (click)="newMeasurement()" aria-label="add measurement"
+        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+    <mat-icon>add</mat-icon>
+</button>
+<!-- / ADD MEASUREMENT BUTTON -->

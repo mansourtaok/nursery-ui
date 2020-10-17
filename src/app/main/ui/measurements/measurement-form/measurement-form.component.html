@@ -1,0 +1,122 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+
+        <mat-toolbar-row class="toolbar-bottom py-1" fxLayout="column" fxLayoutAlign="center center">
+            <div class="measurement-name mt-8">{{measurement.name}}</div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+
+        <form [formGroup]="measurementForm">
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Name</mat-label>
+                    <input name="name" formControlName="name" matInput required>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" class="textarea-wrapper" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Sample</mat-label>
+                    <mat-select formControlName="sampleId">
+                        <mat-option *ngFor="let sample of samples" [value]="sample.id">
+                          {{sample.name}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>
+            </div>  
+
+            <div fxLayout="row"  fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Measurement Date</mat-label>
+                    <input matInput [matDatepicker]="measurementDatePicker" formControlName="measurementDate"> 
+                    <mat-datepicker-toggle matSuffix [for]="measurementDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #measurementDatePicker></mat-datepicker>
+                  </mat-form-field>    
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>PH</mat-label>                    
+                    <input name="ph" formControlName="ph" matInput>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>EC</mat-label>                    
+                    <input name="ec" formControlName="ec" matInput>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Weight</mat-label>                    
+                    <input name="weight" formControlName="weight" matInput>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Height</mat-label>                    
+                    <input name="height" formControlName="height" matInput>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Diameter</mat-label>                    
+                    <input name="diameter" formControlName="diameter" matInput>
+                </mat-form-field>
+            </div>
+            
+            <div fxLayout="row" class="textarea-wrapper" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Remarks</mat-label>
+                    <textarea name="remarks" formControlName="remarks" matInput type="text" max-rows="4"></textarea>
+                </mat-form-field>
+            </div>
+            
+        </form>
+
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+
+        <button *ngIf="action === 'edit'"
+                mat-button
+                class="mr-8"
+                (click)="matDialogRef.close(['delete',measurementForm])"
+                aria-label="Delete"
+                matTooltip="Delete">
+            DELETE
+        </button>
+
+        <button *ngIf="action !== 'edit'"
+                mat-button
+                class="save-button"
+                (click)="matDialogRef.close(measurementForm)"
+                [disabled]="measurementForm.invalid"
+                aria-label="SAVE">
+            ADD
+        </button>
+
+        <button *ngIf="action === 'edit'"
+                mat-button
+                class="save-button"
+                (click)="matDialogRef.close(['save',measurementForm])"
+                [disabled]="measurementForm.invalid"
+                aria-label="SAVE">
+            SAVE
+        </button>
+
+    </div>
+</div>

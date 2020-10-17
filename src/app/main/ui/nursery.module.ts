@@ -8,6 +8,7 @@ import { SpeciesModule } from './species/species.module';
 import { StocksModule } from './stocks/stocks.module';
 import { ZoneModule } from './zones/zones.module';
 import { ZoneSampleModule } from './samples/sample.module';
+import { MeasurementModule } from './measurements/measurement.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ZoneSampleModule } from './samples/sample.module';
         SpeciesModule,
         HarvestModule,
         SeedingModule,
-        ZoneSampleModule
+        ZoneSampleModule,
+        MeasurementModule
     ]
 })
 export class NureryModule

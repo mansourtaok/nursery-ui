@@ -50,6 +50,12 @@ export const navigation: FuseNavigation[] = [
                         type : 'item',
                         url  : '/ui/samples'
                     },
+                    {
+                        id   : 'measurements',
+                        title: 'Measurements',
+                        type : 'item',
+                        url  : '/ui/measurements'
+                    },
 
                     {
                         id   : 'forms',

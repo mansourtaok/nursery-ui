@@ -1,12 +1,7 @@
 import { FuseNavigation } from '@fuse/types';
 
 export const navigation: FuseNavigation[] = [
-    {
-        id       : 'application-modules',
-        title    : 'Modules',
-        translate: 'NAV.MODULES',
-        type     : 'group',
-        children : [
+    
             {
                 id      : 'nursery',
                 title   : 'Nursery',
@@ -77,12 +72,11 @@ export const navigation: FuseNavigation[] = [
                         id   : 'roles',
                         title: 'Roles',
                         type : 'item',
-                        url  : '/ui/forms',
+                        url  : '/sample',
                         icon : 'settings',
                     }
 
                 ]
             }            
-        ]
-    }
+     
 ];

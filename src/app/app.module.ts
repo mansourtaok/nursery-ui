@@ -18,12 +18,16 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
+import { LoginModule } from './main/auth/login/login.module';
 
 
 const appRoutes: Routes = [
+    
+
     {
-        path      : '**',
-        redirectTo: 'forms'
+        path        : '', 
+        pathMatch: 'full' ,
+        redirectTo: 'auth/login'
     },
     {
         path        : 'ui',
@@ -61,7 +65,8 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule
+        SampleModule,
+        LoginModule
     ],
     bootstrap   : [
         AppComponent

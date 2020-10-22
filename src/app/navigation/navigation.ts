@@ -8,11 +8,19 @@ export const navigation: FuseNavigation[] = [
                 type    : 'collapsable',
                 icon    : 'view_quilt',
                 children: [
+
+                   
                     {
                         id      : 'zones',
                         title   : 'Zones',
                         type    : 'item',                        
                         url  : '/ui/zones'
+                    },
+                    {
+                        id      : 'login',
+                        title   : 'login',
+                        type    : 'item',                        
+                        url  : '/auth/login'
                     },
                     
                     {
@@ -77,6 +85,14 @@ export const navigation: FuseNavigation[] = [
                     }
 
                 ]
-            }            
+            },
+            {
+                id      : 'logout',
+                title   : 'Logout',
+                type    : 'item',                        
+                url  : '/auth/login',
+                icon    : 'lock',
+            },
+
      
 ];

@@ -16,15 +16,19 @@ export class AuthService {
 
   login(username, password) {
     
-    if(username == 'mansour.taok@gmail.com'){
-      alert('logged');
+    if(username == 'mark.tawk@gmail.com' && password == '123'){
       this.isLoggedIn = true ;
     }
-    this.redirectUrl = 'ui' ;
+    this.redirectUrl = '/ui/stocks' ;
     this.router.navigate([this.redirectUrl]);
   }
 
   logout(): void {
     this.isLoggedIn = false;
+    this.router.navigate(['/auth/login']);
+  }
+
+  isLogged(): boolean{
+    return this.isLoggedIn ;
   }
 }

@@ -20,11 +20,12 @@ import { ZoneListComponent } from 'app/main/ui/zones/zone-list/zone-list.compone
 import { ZoneSelectedBarComponent } from 'app/main/ui/zones/selected-bar/selected-bar.component';
 import { ZoneFormDialogComponent } from 'app/main/ui/zones/zone-form/zone-form.component';
 import { MatSelectModule } from '@angular/material/select';
+import { AuthenticationGuardService } from 'app/main/auth/authentication-guard.service';
 
 
-const routes: Routes = [
+const routes: Routes = [    
     {
-        path     : 'zones',
+        path     : 'zones',        
         component: ZoneComponent,
         resolve  : {
             zones: ZoneService

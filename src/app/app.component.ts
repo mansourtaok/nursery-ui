@@ -14,6 +14,7 @@ import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.
 import { navigation } from 'app/navigation/navigation';
 import { locale as navigationEnglish } from 'app/navigation/i18n/en';
 import { locale as navigationTurkish } from 'app/navigation/i18n/tr';
+import { AuthService } from './main/auth/login/auth.service';
 
 @Component({
     selector   : 'app',
@@ -48,7 +49,8 @@ export class AppComponent implements OnInit, OnDestroy
         private _fuseSplashScreenService: FuseSplashScreenService,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _translateService: TranslateService,
-        private _platform: Platform
+        private _platform: Platform,
+        private _authService: AuthService
     )
     {
         // Get default navigation
@@ -154,6 +156,7 @@ export class AppComponent implements OnInit, OnDestroy
 
                 this.document.body.classList.add(this.fuseConfig.colorTheme);
             });
+            this.addNavItemWithCustomFunction();
     }
 
     /**
@@ -179,4 +182,22 @@ export class AppComponent implements OnInit, OnDestroy
     {
         this._fuseSidebarService.getSidebar(key).toggleOpen();
     }
+
+
+    addNavItemWithCustomFunction()
+    {
+        // Prepare the new nav item
+        const newNavItem = {
+            id      : 'logout',
+            title   : 'Logout',
+            type    : 'item',
+            icon    : 'lock',
+            function: () => {
+                this._authService.logout();
+            }
+        };
+    
+        // Add the new nav item at the beginning of the navigation
+        this._fuseNavigationService.addNavigationItem(newNavItem, 'start');
+    }    
 }

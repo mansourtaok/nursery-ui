@@ -64,6 +64,6 @@ export class LoginComponent implements OnInit
 
     login() : void
     {
-        this._authService.login('a','b');
+        this._authService.login(this.loginForm.get('email').value,this.loginForm.get('password').value);
     }
 }

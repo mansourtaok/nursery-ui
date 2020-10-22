@@ -19,6 +19,7 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import { LoginModule } from './main/auth/login/login.module';
+import { AuthenticationGuardService } from './main/auth/authentication-guard.service';
 
 
 const appRoutes: Routes = [
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
     },
     {
         path        : 'ui',
+        canActivate: [AuthenticationGuardService],
         loadChildren: () => import('./main/ui/nursery.module').then(m => m.NureryModule)
     },
 
@@ -70,6 +72,9 @@ const appRoutes: Routes = [
     ],
     bootstrap   : [
         AppComponent
+    ],
+    providers :[
+        AuthenticationGuardService
     ]
 })
 export class AppModule

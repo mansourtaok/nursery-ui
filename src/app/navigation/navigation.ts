@@ -85,14 +85,7 @@ export const navigation: FuseNavigation[] = [
                     }
 
                 ]
-            },
-            {
-                id      : 'logout',
-                title   : 'Logout',
-                type    : 'item',                        
-                url  : '/auth/login',
-                icon    : 'lock',
-            },
+            }
 
      
 ];

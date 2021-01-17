@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FuseUtils } from '@fuse/utils';
 import { Seeding } from './seeding.model';
 import { DatePipe } from '@angular/common';
+import { environment } from './../../../../environments/environment';
 
 @Injectable()
 export class SeedingService implements Resolve<any>
@@ -85,7 +86,7 @@ export class SeedingService implements Resolve<any>
     {
         return new Promise((resolve, reject) => {
             
-                this._httpClient.get('http://localhost:8080/api/v1/nursery/seedings')
+                this._httpClient.get(environment.apiUrl + '/api/v1/nursery/seedings')
                     .subscribe((response: any) => {
 
                         this.seedingList = response;
@@ -193,14 +194,14 @@ export class SeedingService implements Resolve<any>
             seeding.directSeedingDate =  this._datePipe.transform(seeding.directSeedingDate, 'yyyy-MM-dd') ;
             
             if(seeding.id == -1){
-                this._httpClient.put('http://localhost:8080/api/v1/nursery/seeding', {...seeding})
+                this._httpClient.put(environment.apiUrl + '/api/v1/nursery/seeding', {...seeding})
                 .subscribe(response => {
                     this.getSeedings();
                     resolve(response);
                 });
             }else{
                 
-                this._httpClient.post('http://localhost:8080/api/v1/nursery/seeding/' + seeding.id, {...seeding})
+                this._httpClient.post(environment.apiUrl + '/api/v1/nursery/seeding/' + seeding.id, {...seeding})
                 .subscribe(response => {
                     this.getSeedings();
                     resolve(response);
@@ -230,7 +231,7 @@ export class SeedingService implements Resolve<any>
      */
     deleteSeeding(seeding): void
     {
-        this._httpClient.delete('http://localhost:8080/api/v1/nursery/seeding/' + seeding.id).subscribe(data => {
+        this._httpClient.delete(environment.apiUrl + '/api/v1/nursery/seeding/' + seeding.id).subscribe(data => {
             const seedingIndex = this.seedingList.indexOf(seeding);
             this.seedingList.splice(seedingIndex, 1);
             this.onSeedingChanged.next(this.seedingList);    
@@ -243,7 +244,7 @@ export class SeedingService implements Resolve<any>
     deleteSelectedSeeding(): void
     {
         let ids : string =  this.selectedSeedings.join(',')
-        this._httpClient.delete('http://localhost:8080/api/v1/nursery/seeding/' +ids).subscribe(data => {
+        this._httpClient.delete(environment.apiUrl + '/api/v1/nursery/seeding/' +ids).subscribe(data => {
 
             for ( const seedingId of this.selectedSeedings )
             {

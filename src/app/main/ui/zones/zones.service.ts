@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { FuseUtils } from '@fuse/utils';
 import { Zone } from './zone.model';
+import { environment } from './../../../../environments/environment';
 
 @Injectable()
 export class ZoneService implements Resolve<any>
@@ -84,7 +85,7 @@ export class ZoneService implements Resolve<any>
     {
         return new Promise((resolve, reject) => {
             
-                this._httpClient.get('http://localhost:8080/api/v1/nursery/zones')
+                this._httpClient.get(environment.apiUrl + '/api/v1/nursery/zones')
                     .subscribe((response: any) => {
 
                         this.zones = response;
@@ -188,13 +189,13 @@ export class ZoneService implements Resolve<any>
         return new Promise((resolve, reject) => {
 
             if(zone.id == -1){
-                this._httpClient.put('http://localhost:8080/api/v1/nursery/zone', {...zone})
+                this._httpClient.put(environment.apiUrl + '/api/v1/nursery/zone', {...zone})
                 .subscribe(response => {
                     this.getZones();
                     resolve(response);
                 });
             }else{
-                this._httpClient.post('http://localhost:8080/api/v1/nursery/zone/' + zone.id, {...zone})
+                this._httpClient.post(environment.apiUrl + '/api/v1/nursery/zone/' + zone.id, {...zone})
                 .subscribe(response => {
                     this.getZones();
                     resolve(response);
@@ -224,7 +225,7 @@ export class ZoneService implements Resolve<any>
      */
     deleteZone(zone): void
     {
-        this._httpClient.delete('http://localhost:8080/api/v1/nursery/zone/' + zone.id).subscribe(data => {
+        this._httpClient.delete(environment.apiUrl + '/api/v1/nursery/zone/' + zone.id).subscribe(data => {
             const zoneIndex = this.zones.indexOf(zone);
             this.zones.splice(zoneIndex, 1);
             this.onZoneChanged.next(this.zones);    
@@ -237,7 +238,7 @@ export class ZoneService implements Resolve<any>
     deleteSelectedZones(): void
     {
         let ids : string =  this.selectedZones.join(',')
-        this._httpClient.delete('http://localhost:8080/api/v1/nursery/zone/' +ids).subscribe(data => {
+        this._httpClient.delete(environment.apiUrl + '/api/v1/nursery/zone/' +ids).subscribe(data => {
 
             for ( const zoneId of this.selectedZones )
             {

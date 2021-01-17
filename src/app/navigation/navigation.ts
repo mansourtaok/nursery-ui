@@ -15,14 +15,7 @@ export const navigation: FuseNavigation[] = [
                         title   : 'Zones',
                         type    : 'item',                        
                         url  : '/ui/zones'
-                    },
-                    {
-                        id      : 'login',
-                        title   : 'login',
-                        type    : 'item',                        
-                        url  : '/auth/login'
-                    },
-                    
+                    },                    
                     {
                         id   : 'stocks',
                         title: 'Stocks',

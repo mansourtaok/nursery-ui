@@ -5,6 +5,8 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { FuseUtils } from '@fuse/utils';
 import { Measurement } from './measurement.model';
+import { environment } from './../../../../environments/environment';
+
 
 
 
@@ -86,7 +88,7 @@ export class MeasurementService implements Resolve<any>
     {
         return new Promise((resolve, reject) => {
             
-                this._httpClient.get('http://localhost:8080/api/v1/nursery/measurements')
+                this._httpClient.get(environment.apiUrl + '/api/v1/nursery/measurements')
                     .subscribe((response: any) => {
 
                         this.measurements = response;
@@ -190,13 +192,13 @@ export class MeasurementService implements Resolve<any>
         return new Promise((resolve, reject) => {
 
             if(measurement.id == -1){
-                this._httpClient.put('http://localhost:8080/api/v1/nursery/measurement', {...measurement})
+                this._httpClient.put(environment.apiUrl + '/api/v1/nursery/measurement', {...measurement})
                 .subscribe(response => {
                     this.getMeasurements();
                     resolve(response);
                 });
             }else{
-                this._httpClient.post('http://localhost:8080/api/v1/nursery/measurement/' + measurement.id, {...measurement})
+                this._httpClient.post(environment.apiUrl + '/api/v1/nursery/measurement/' + measurement.id, {...measurement})
                 .subscribe(response => {
                     this.getMeasurements();
                     resolve(response);
@@ -226,7 +228,7 @@ export class MeasurementService implements Resolve<any>
      */
     deleteMeasurement(measurement): void
     {
-        this._httpClient.delete('http://localhost:8080/api/v1/nursery/measurement/' + measurement.id).subscribe(data => {
+        this._httpClient.delete(environment.apiUrl + '/api/v1/nursery/measurement/' + measurement.id).subscribe(data => {
             const measurementIndex = this.measurements.indexOf(measurement);
             this.measurements.splice(measurementIndex, 1);
             this.onMeasurementChanged.next(this.measurements);    
@@ -239,7 +241,7 @@ export class MeasurementService implements Resolve<any>
     deleteselectedMeasurements(): void
     {
         let ids : string =  this.selectedMeasurements.join(',')
-        this._httpClient.delete('http://localhost:8080/api/v1/nursery/measurement/' +ids).subscribe(data => {
+        this._httpClient.delete(environment.apiUrl + '/api/v1/nursery/measurement/' +ids).subscribe(data => {
 
             for ( const measurementId of this.selectedMeasurements )
             {

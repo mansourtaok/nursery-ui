@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { FuseUtils } from '@fuse/utils';
 import { Sample } from './sample.model';
-
+import { environment } from './../../../../environments/environment';
 
 @Injectable()
 export class SampleService implements Resolve<any>
@@ -85,7 +85,7 @@ export class SampleService implements Resolve<any>
     {
         return new Promise((resolve, reject) => {
             
-                this._httpClient.get('http://localhost:8080/api/v1/nursery/samples')
+                this._httpClient.get(environment.apiUrl + '/api/v1/nursery/samples')
                     .subscribe((response: any) => {
 
                         this.samples = response;
@@ -189,13 +189,13 @@ export class SampleService implements Resolve<any>
         return new Promise((resolve, reject) => {
 
             if(sample.id == -1){
-                this._httpClient.put('http://localhost:8080/api/v1/nursery/sample', {...sample})
+                this._httpClient.put(environment.apiUrl + '/api/v1/nursery/sample', {...sample})
                 .subscribe(response => {
                     this.getSamples();
                     resolve(response);
                 });
             }else{
-                this._httpClient.post('http://localhost:8080/api/v1/nursery/sample/' + sample.id, {...sample})
+                this._httpClient.post(environment.apiUrl + '/api/v1/nursery/sample/' + sample.id, {...sample})
                 .subscribe(response => {
                     this.getSamples();
                     resolve(response);
@@ -225,7 +225,7 @@ export class SampleService implements Resolve<any>
      */
     deleteSample(sample): void
     {
-        this._httpClient.delete('http://localhost:8080/api/v1/nursery/sample/' + sample.id).subscribe(data => {
+        this._httpClient.delete(environment.apiUrl + '/api/v1/nursery/sample/' + sample.id).subscribe(data => {
             const sampleIndex = this.samples.indexOf(sample);
             this.samples.splice(sampleIndex, 1);
             this.onSampleChanged.next(this.samples);    
@@ -238,7 +238,7 @@ export class SampleService implements Resolve<any>
     deleteselectedSamples(): void
     {
         let ids : string =  this.selectedSamples.join(',')
-        this._httpClient.delete('http://localhost:8080/api/v1/nursery/sample/' +ids).subscribe(data => {
+        this._httpClient.delete(environment.apiUrl + '/api/v1/nursery/sample/' +ids).subscribe(data => {
 
             for ( const sampleId of this.selectedSamples )
             {

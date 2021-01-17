@@ -7,6 +7,7 @@ import { FuseUtils } from '@fuse/utils';
 
 import { Harvest } from 'app/main/ui/harvest/harvest.model';
 import { DatePipe } from '@angular/common';
+import { environment } from './../../../../environments/environment';
 
 @Injectable()
 export class HarvestService implements Resolve<any>
@@ -86,7 +87,7 @@ export class HarvestService implements Resolve<any>
     {
         return new Promise((resolve, reject) => {
             
-                this._httpClient.get('http://localhost:8080/api/v1/nursery/harvest/all')
+                this._httpClient.get(environment.apiUrl + '/api/v1/nursery/harvest/all')
                     .subscribe((response: any) => {
 
                         this.harvestList = response;
@@ -193,13 +194,13 @@ export class HarvestService implements Resolve<any>
             harvest.harvestDate =  this._datePipe.transform(harvest.harvestDate, 'yyyy-MM-dd') ;
 
             if(harvest.id == -1){
-                this._httpClient.put('http://localhost:8080/api/v1/nursery/harvest', {...harvest})
+                this._httpClient.put(environment.apiUrl + '/api/v1/nursery/harvest', {...harvest})
                 .subscribe(response => {
                     this.getHarvests();
                     resolve(response);
                 });
             }else{
-                this._httpClient.post('http://localhost:8080/api/v1/nursery/harvest/' + harvest.id, {...harvest})
+                this._httpClient.post(environment.apiUrl + '/api/v1/nursery/harvest/' + harvest.id, {...harvest})
                 .subscribe(response => {
                     this.getHarvests();
                     resolve(response);
@@ -229,7 +230,7 @@ export class HarvestService implements Resolve<any>
      */
     deleteHarvest(harvest): void
     {
-        this._httpClient.delete('http://localhost:8080/api/v1/nursery/harvest/' + harvest.id).subscribe(data => {
+        this._httpClient.delete(environment.apiUrl + '/api/v1/nursery/harvest/' + harvest.id).subscribe(data => {
             const harvestIndex = this.harvestList.indexOf(harvest);
             this.harvestList.splice(harvestIndex, 1);
             this.onHarvestChanged.next(this.harvestList);    
@@ -242,7 +243,7 @@ export class HarvestService implements Resolve<any>
     deleteSelectedHarvest(): void
     {
         let ids : string =  this.selectedHarvests.join(',')
-        this._httpClient.delete('http://localhost:8080/api/v1/nursery/harvest/' +ids).subscribe(data => {
+        this._httpClient.delete(environment.apiUrl + '/api/v1/nursery/harvest/' +ids).subscribe(data => {
 
             for ( const harvestId of this.selectedHarvests )
             {

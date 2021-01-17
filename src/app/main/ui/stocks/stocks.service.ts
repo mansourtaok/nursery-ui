@@ -6,10 +6,13 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FuseUtils } from '@fuse/utils';
 
 import { Stock } from 'app/main/ui/stocks/stock.model';
+import { environment } from './../../../../environments/environment';
 
 @Injectable()
 export class StocksService implements Resolve<any>
 {
+
+    
     onStocksChanged: BehaviorSubject<any>;
     onSelectedStocksChanged: BehaviorSubject<any>;    
     onSearchTextChanged: Subject<any>;
@@ -34,7 +37,7 @@ export class StocksService implements Resolve<any>
         this.onStocksChanged = new BehaviorSubject([]);
         this.onSelectedStocksChanged = new BehaviorSubject([]);        
         this.onSearchTextChanged = new Subject();
-        this.onFilterChanged = new Subject();
+        this.onFilterChanged = new Subject();        
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -84,7 +87,7 @@ export class StocksService implements Resolve<any>
     {
         return new Promise((resolve, reject) => {
             
-                this._httpClient.get('http://localhost:8080/api/v1/nursery/stocks')
+                this._httpClient.get(environment.apiUrl + '/api/v1/nursery/stocks')
                     .subscribe((response: any) => {
 
                         this.stocks = response;
@@ -188,13 +191,13 @@ export class StocksService implements Resolve<any>
         return new Promise((resolve, reject) => {
 
             if(stock.id == -1){
-                this._httpClient.put('http://localhost:8080/api/v1/nursery/stock', {...stock})
+                this._httpClient.put(environment.apiUrl +'/api/v1/nursery/stock', {...stock})
                 .subscribe(response => {
                     this.getStocks();
                     resolve(response);
                 });
             }else{
-                this._httpClient.post('http://localhost:8080/api/v1/nursery/stock/' + stock.id, {...stock})
+                this._httpClient.post(environment.apiUrl +'/api/v1/nursery/stock/' + stock.id, {...stock})
                 .subscribe(response => {
                     this.getStocks();
                     resolve(response);
@@ -224,7 +227,7 @@ export class StocksService implements Resolve<any>
      */
     deleteStock(stock): void
     {
-        this._httpClient.delete('http://localhost:8080/api/v1/nursery/stock/' + stock.id).subscribe(data => {
+        this._httpClient.delete(environment.apiUrl +'/api/v1/nursery/stock/' + stock.id).subscribe(data => {
             const stockIndex = this.stocks.indexOf(stock);
             this.stocks.splice(stockIndex, 1);
             this.onStocksChanged.next(this.stocks);    
@@ -237,7 +240,7 @@ export class StocksService implements Resolve<any>
     deleteSelectedStocks(): void
     {
         let ids : string =  this.selectedStocks.join(',')
-        this._httpClient.delete('http://localhost:8080/api/v1/nursery/stock/' +ids).subscribe(data => {
+        this._httpClient.delete(environment.apiUrl +'/api/v1/nursery/stock/' +ids).subscribe(data => {
 
             for ( const stockId of this.selectedStocks )
             {

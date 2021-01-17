@@ -24,7 +24,11 @@ import { AuthenticationGuardService } from './main/auth/authentication-guard.ser
 
 const appRoutes: Routes = [
     
-
+    {
+        path        : 'nursery', 
+        pathMatch: 'full' ,
+        redirectTo: 'auth/login'
+    },
     {
         path        : '', 
         pathMatch: 'full' ,

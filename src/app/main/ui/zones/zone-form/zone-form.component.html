@@ -54,6 +54,24 @@
                     <textarea name="description" formControlName="description" matInput type="text" max-rows="4"></textarea>
                 </mat-form-field>
             </div>
+
+            <div fxLayout="row"  fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Seeding date</mat-label>
+                    <input matInput [matDatepicker]="seedingDatePicker" formControlName="seedingDate"> 
+                    <mat-datepicker-toggle matSuffix [for]="seedingDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #seedingDatePicker></mat-datepicker>
+                  </mat-form-field>    
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Number of seededs</mat-label>                    
+                    <input name="name" formControlName="numberOfSeeds" matInput>
+                </mat-form-field>
+            </div>
+
+
             
         </form>
 

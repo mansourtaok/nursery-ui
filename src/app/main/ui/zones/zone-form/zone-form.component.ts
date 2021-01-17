@@ -73,6 +73,8 @@ export class ZoneFormDialogComponent
             id      : [this.zone.id],
             name    : [this.zone.name],
             description :[this.zone.description],
+            seedingDate :[this.zone.seedingDate],
+            numberOfSeeds :[this.zone.numberOfSeeds],        
             stockId:this.zone.stockId,
             seedingId : this.zone.seedingId
         });

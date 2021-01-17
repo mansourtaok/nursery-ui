@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FuseUtils } from '@fuse/utils';
 import { Zone } from './zone.model';
 import { environment } from './../../../../environments/environment';
+import { DatePipe } from '@angular/common';
 
 @Injectable()
 export class ZoneService implements Resolve<any>
@@ -28,7 +29,8 @@ export class ZoneService implements Resolve<any>
      * @param {HttpClient} _httpClient
      */
     constructor(
-        private _httpClient: HttpClient
+        private _httpClient: HttpClient,
+        private _datePipe : DatePipe
     )
     {
         // Set the defaults
@@ -187,6 +189,8 @@ export class ZoneService implements Resolve<any>
     updateZone(zone): Promise<any>
     {
         return new Promise((resolve, reject) => {
+
+            zone.seedingDate =  this._datePipe.transform(zone.seedingDate, 'yyyy-MM-dd') ;
 
             if(zone.id == -1){
                 this._httpClient.put(environment.apiUrl + '/api/v1/nursery/zone', {...zone})

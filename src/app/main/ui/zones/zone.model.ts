@@ -7,6 +7,8 @@ export class Zone
     description:string;
     stockId:string;
     seedingId :string;
+    seedingDate :string;
+    numberOfSeeds :string;
 
     /**
      * Constructor
@@ -21,6 +23,8 @@ export class Zone
             this.description = zone.description || '';
             this.stockId = zone.stockId || -1;
             this.seedingId = zone.seedingId || -1;
+            this.seedingDate = zone.seedingDate || '';
+            this.numberOfSeeds = zone.numberOfSeeds || '';
         }
     }
 }

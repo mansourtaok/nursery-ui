@@ -8,25 +8,17 @@ export const navigation: FuseNavigation[] = [
                 type    : 'collapsable',
                 icon    : 'view_quilt',
                 children: [
-
-                   
-                    {
-                        id      : 'zones',
-                        title   : 'Zones',
-                        type    : 'item',                        
-                        url  : '/ui/zones'
-                    },                    
-                    {
-                        id   : 'stocks',
-                        title: 'Stocks',
-                        type : 'item',
-                        url  : '/ui/stocks'
-                    },
                     {
                         id   : 'species',
                         title: 'Species',
                         type : 'item',
                         url  : '/ui/species'
+                    },
+                    {
+                        id   : 'stocks',
+                        title: 'Stocks',
+                        type : 'item',
+                        url  : '/ui/stocks'
                     },
                     {
                         id   : 'harvest',
@@ -39,7 +31,13 @@ export const navigation: FuseNavigation[] = [
                         title: 'Seeding',
                         type : 'item',
                         url  : '/ui/seeding'
-                    },
+                    },                   
+                    {
+                        id      : 'zones',
+                        title   : 'Zones',
+                        type    : 'item',                        
+                        url  : '/ui/zones'
+                    },                    
                     {
                         id   : 'samples',
                         title: 'Samples',

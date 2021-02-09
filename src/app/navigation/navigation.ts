@@ -71,7 +71,7 @@ export const navigation: FuseNavigation[] = [
                         title   : 'Users',
                         type    : 'item',
                         icon : 'person',                    
-                        url  : '/sample'
+                        url  : '/ui/users'
                     },
                     
                     {

@@ -1,0 +1,78 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+
+        <mat-toolbar-row class="toolbar-bottom py-1" fxLayout="column" fxLayoutAlign="center center">
+            <div class="user-name mt-8">{{user.name}}</div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+
+        <form [formGroup]="userForm">
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Name</mat-label>                    
+                    <input name="name" formControlName="name" matInput>
+                </mat-form-field>
+            </div>
+
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Email</mat-label>                    
+                    <input name="email" formControlName="email" matInput>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Password</mat-label>                    
+                    <input name="password" formControlName="password" matInput type="password">
+                </mat-form-field>
+            </div>
+
+            
+
+            
+        </form>
+
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+
+        <button *ngIf="action === 'edit'"
+                mat-button
+                class="mr-8"
+                (click)="matDialogRef.close(['delete',userForm])"
+                aria-label="Delete"
+                matTooltip="Delete">
+            DELETE
+        </button>
+
+        <button *ngIf="action !== 'edit'"
+                mat-button
+                class="save-button"
+                (click)="matDialogRef.close(userForm)"
+                [disabled]="userForm.invalid"
+                aria-label="SAVE">
+            ADD
+        </button>
+
+        <button *ngIf="action === 'edit'"
+                mat-button
+                class="save-button"
+                (click)="matDialogRef.close(['save',userForm])"
+                [disabled]="userForm.invalid"
+                aria-label="SAVE">
+            SAVE
+        </button>
+
+    </div>
+</div>

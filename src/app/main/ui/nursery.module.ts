@@ -11,6 +11,7 @@ import { ZoneSampleModule } from './samples/sample.module';
 import { MeasurementModule } from './measurements/measurement.module';
 import { RouterModule } from '@angular/router';
 import { IrrigationModule } from './irrigation/irrigation.module';
+import { UserModule } from './users/user.module';
 
 
 
@@ -25,6 +26,7 @@ import { IrrigationModule } from './irrigation/irrigation.module';
         ZoneSampleModule,
         MeasurementModule,
         IrrigationModule,
+        UserModule,
         RouterModule
     ]
 })

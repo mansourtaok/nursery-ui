@@ -10,6 +10,7 @@ import { ZoneModule } from './zones/zones.module';
 import { ZoneSampleModule } from './samples/sample.module';
 import { MeasurementModule } from './measurements/measurement.module';
 import { RouterModule } from '@angular/router';
+import { IrrigationModule } from './irrigation/irrigation.module';
 
 
 
@@ -22,7 +23,8 @@ import { RouterModule } from '@angular/router';
         HarvestModule,
         SeedingModule,
         ZoneSampleModule,
-        MeasurementModule,        
+        MeasurementModule,
+        IrrigationModule,
         RouterModule
     ]
 })

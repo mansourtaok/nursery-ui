@@ -233,6 +233,9 @@ export class ZoneService implements Resolve<any>
             const zoneIndex = this.zones.indexOf(zone);
             this.zones.splice(zoneIndex, 1);
             this.onZoneChanged.next(this.zones);    
+        },error =>{
+            alert('An Unexpected Error Occured.');  
+            console.log(error);  
         });
     }
 

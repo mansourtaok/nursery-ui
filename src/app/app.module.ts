@@ -26,7 +26,7 @@ const appRoutes: Routes = [
     
     {
         path        : 'nursery', 
-        pathMatch: 'full' ,
+        pathMatch: 'prefix' ,
         redirectTo: 'auth/login'
     },
     {

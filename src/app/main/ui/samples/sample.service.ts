@@ -68,7 +68,7 @@ export class SampleService implements Resolve<any>
                         this.getSamples();
                     });
 
-                    resolve();
+                    resolve(null);
 
                 },
                 reject

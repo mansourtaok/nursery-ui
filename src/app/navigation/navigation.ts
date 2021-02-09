@@ -49,7 +49,14 @@ export const navigation: FuseNavigation[] = [
                         title: 'Measurements',
                         type : 'item',
                         url  : '/ui/measurements'
+                    },
+                    {
+                        id      : 'irrigations',
+                        title   : 'Irrigations',
+                        type    : 'item',                        
+                        url  : '/ui/irrigations'
                     }
+
 
                 ]
             },

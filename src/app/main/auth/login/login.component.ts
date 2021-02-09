@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Injectable, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { AuthService } from './auth.service';
+import { Auth } from './auth.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector     : 'login',
@@ -15,6 +17,8 @@ import { AuthService } from './auth.service';
 export class LoginComponent implements OnInit
 {
     loginForm: FormGroup;
+    valid : boolean  = true;
+    isLoggedIn: boolean = false;  
 
     /**
      * Constructor
@@ -25,9 +29,11 @@ export class LoginComponent implements OnInit
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
+        private router: Router,
         private _authService : AuthService
     )
     {
+        this.valid = true ;
         // Configure the layout
         this._fuseConfigService.config = {
             layout: {
@@ -64,6 +70,12 @@ export class LoginComponent implements OnInit
 
     login() : void
     {
-        this._authService.login(this.loginForm.get('email').value,this.loginForm.get('password').value);
+        this._authService.login(new Auth({username : this.loginForm.get('email').value,password : this.loginForm.get('password').value})).then(response => {
+            if(response == true){
+                this.router.navigate(['/ui/stocks']);
+            }
+            this.valid = false ;
+        }) ;
     }
+
 }

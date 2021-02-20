@@ -19,7 +19,7 @@ export class User
         {
             this.id = user.id || -1;
             this.name = user.name || '';            
-            this.email = user.email || -1;            
+            this.email = user.email || '';            
             this.password = user.password || '';            
         }
     }

@@ -18,6 +18,8 @@ import { MeasurementService } from './measurement.service';
 import { MeasurementComponent } from './measurement.component';
 import { MeasurementListComponent } from './measurement-list/measurement-list.component';
 import { MeasurementSelectedBarComponent } from './measurement-bar/selected-bar.component';
+import { WeatherService } from '../weather/weather.service';
+import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
     {
@@ -48,6 +50,7 @@ const routes: Routes = [
         MatMenuModule,
         MatRippleModule,
         MatTableModule,
+        MatSortModule,
         MatToolbarModule,
         MatSelectModule,
         FuseSharedModule,
@@ -55,7 +58,8 @@ const routes: Routes = [
         FuseSidebarModule
     ],
     providers      : [
-        MeasurementService
+        MeasurementService,
+        WeatherService
     ],
     entryComponents: [
         MeasurementFormDialogComponent

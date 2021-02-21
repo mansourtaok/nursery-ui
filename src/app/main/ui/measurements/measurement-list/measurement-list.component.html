@@ -21,14 +21,46 @@
     </ng-container>
 
     <ng-container matColumnDef="sample">
-        <mat-header-cell *matHeaderCellDef>Sample</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef >Sample</mat-header-cell>
         <mat-cell *matCellDef="let measurement">
             <p class="text-truncate font-weight-600">{{sampleName(measurement.sampleId)}}</p>
         </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="measurementDate">
+        <mat-header-cell *matHeaderCellDef >Date</mat-header-cell>
+        <mat-cell *matCellDef="let measurement">
+            <p class="text-truncate font-weight-600">{{measurement.measurementDate}}</p>
+        </mat-cell>
+    </ng-container>
 
+    <ng-container matColumnDef="ph">
+        <mat-header-cell *matHeaderCellDef>PH</mat-header-cell>
+        <mat-cell *matCellDef="let measurement">
+            <p class="text-truncate font-weight-600">{{measurement.ph}}</p>
+        </mat-cell>
+    </ng-container>
 
+    <ng-container matColumnDef="ec">
+        <mat-header-cell *matHeaderCellDef>EC</mat-header-cell>
+        <mat-cell *matCellDef="let measurement">
+            <p class="text-truncate font-weight-600">{{measurement.ec}}</p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="weight">
+        <mat-header-cell *matHeaderCellDef>Weight</mat-header-cell>
+        <mat-cell *matCellDef="let measurement">
+            <p class="text-truncate font-weight-600">{{measurement.weight}}</p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="height">
+        <mat-header-cell *matHeaderCellDef>Height</mat-header-cell>
+        <mat-cell *matCellDef="let measurement">
+            <p class="text-truncate font-weight-600">{{measurement.height}}</p>
+        </mat-cell>
+    </ng-container>
     
     <!-- Buttons Column -->
     <ng-container matColumnDef="buttons">

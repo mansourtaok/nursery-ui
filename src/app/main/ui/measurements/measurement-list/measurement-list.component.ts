@@ -19,6 +19,7 @@ import { MeasurementService } from '../measurement.service';
 import { SampleService } from '../../samples/sample.service';
 import { MeasurementFormDialogComponent } from '../measurement-form/measurement-form.component';
 
+
 @Component({
     selector     : 'measurement-list',
     templateUrl  : './measurement-list.component.html',
@@ -36,7 +37,7 @@ export class MeasurementListComponent implements OnInit, OnDestroy
     
     
     dataSource: FilesDataSource | null;
-    displayedColumns = ['checkbox', 'name', 'sample', 'buttons'];
+    displayedColumns = ['checkbox', 'name', 'sample','measurementDate','ph','ec','weight','height', 'buttons'];
     selectedMeasurements: any[];
     checkboxes: {};
     dialogRef: any;

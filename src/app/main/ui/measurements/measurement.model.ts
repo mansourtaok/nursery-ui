@@ -12,6 +12,8 @@ export class Measurement
     weight:string;
     height:string;
     diameter:string;
+    temperature:string;
+    weatherId:string;
     
 
     /**
@@ -32,6 +34,8 @@ export class Measurement
             this.weight = measurement.weight || '';
             this.height = measurement.height || '';
             this.diameter = measurement.diameter || '';
+            this.weatherId = measurement.weatherId || '';  
+            this.temperature = measurement.temperature || '';  
         }
     }
 }

@@ -78,12 +78,32 @@
                 </mat-form-field>
             </div>
             
-            <div fxLayout="row" class="textarea-wrapper" fxLayoutAlign="start start">
+            <div fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Remarks</mat-label>
                     <textarea name="remarks" formControlName="remarks" matInput type="text" max-rows="4"></textarea>
                 </mat-form-field>
             </div>
+
+
+            <div fxLayout="row"  fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Weather</mat-label>
+                    <mat-select formControlName="weatherId">
+                        <mat-option *ngFor="let weather of weatherList" [value]="weather.id">
+                          {{weather.value}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>
+            </div>  
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Temperature</mat-label>                    
+                    <input name="temperature" formControlName="temperature" matInput>
+                </mat-form-field>
+            </div>
+
             
         </form>
 

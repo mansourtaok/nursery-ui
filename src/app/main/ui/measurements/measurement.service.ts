@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FuseUtils } from '@fuse/utils';
 import { Measurement } from './measurement.model';
 import { environment } from './../../../../environments/environment';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -31,7 +32,8 @@ export class MeasurementService implements Resolve<any>
      * @param {HttpClient} _httpClientmea
      */
     constructor(
-        private _httpClient: HttpClient
+        private _httpClient: HttpClient,
+        private _datePipe :DatePipe
     )
     {
         // Set the defaults
@@ -190,6 +192,8 @@ export class MeasurementService implements Resolve<any>
     updateMeasurement(measurement): Promise<any>
     {
         return new Promise((resolve, reject) => {
+            
+            measurement.measurementDate =  this._datePipe.transform(measurement.measurementDate, 'yyyy-MM-dd') ;
 
             if(measurement.id == -1){
                 this._httpClient.put(environment.apiUrl + '/api/v1/nursery/measurement', {...measurement})

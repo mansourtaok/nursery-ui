@@ -23,6 +23,7 @@ export class Harvest
     validCones:string;
     validSeedsWeight:string;
     validSeedsNumber:string;
+    validSeedsPerWeight:string;
     health:string;
     
     weather:string;    
@@ -54,6 +55,7 @@ export class Harvest
             this.validCones = harvest.validCones || '';
             this.validSeedsWeight = harvest.validSeedsWeight || '';
             this.validSeedsNumber = harvest.validSeedsNumber || '';
+            this.validSeedsPerWeight = harvest.validSeedsPerWeight || '';
             this.weather = harvest.weather || '';
             this.health = harvest.health || '';
             this.temperature = harvest.temperature || '';

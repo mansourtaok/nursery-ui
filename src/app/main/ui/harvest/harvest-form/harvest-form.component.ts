@@ -96,6 +96,7 @@ export class HarvestFormDialogComponent
             validCones : [this.harvest.validCones],
             validSeedsWeight : [this.harvest.validSeedsWeight],
             validSeedsNumber : [this.harvest.validSeedsNumber],
+            validSeedsPerWeight : [this.harvest.validSeedsPerWeight],
             health: [this.harvest.health]
         });
 
